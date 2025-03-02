@@ -1,0 +1,9 @@
+<div class="container mt-4">
+  <h2>Lista de Empresas</h2>
+  <div *ngFor="let empresa of empresas" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ empresa.nombre }}</h5>
+      <p class="card-text">{{ empresa.direccion }}</p>
+    </div>
+  </div>
+</div>

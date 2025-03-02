@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h2>Agregar Empleado</h2>
+  <form (ngSubmit)="agregarEmpleado()">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="empleado.nombre" name="nombre" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Puesto</label>
+      <input type="text" class="form-control" [(ngModel)]="empleado.puesto" name="puesto" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Empresa</label>
+      <select class="form-control" [(ngModel)]="empleado.empresaId" name="empresaId" required>
+        <option *ngFor="let empresa of empresas" [value]="empresa.id">{{ empresa.nombre }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar</button>
+  </form>
+</div>

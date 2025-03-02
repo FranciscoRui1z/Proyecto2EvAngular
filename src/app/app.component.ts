@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from "./shared/navbar/navbar.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `
+    <app-navbar></app-navbar>
+    <div class="container mt-4">
+      <router-outlet></router-outlet>
+    </div>
+  `,
+  imports: [NavbarComponent, RouterModule]
 })
-export class AppComponent {
-  title = 'proyectoAngularFRL';
-}
+export class AppComponent {}
