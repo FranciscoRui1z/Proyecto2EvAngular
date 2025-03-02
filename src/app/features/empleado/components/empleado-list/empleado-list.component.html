@@ -1,19 +1,37 @@
 <div class="container mt-4">
   <h2>Lista de Empleados</h2>
+  <div>
+    <a href="/empleados/nuevo" class="btn btn-primary">Agregar Nuevo</a>
+  </div>
   <table class="table">
     <thead>
       <tr>
         <th>Nombre</th>
         <th>Puesto</th>
+        <th>Departamento</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let empleado of empleados">
-        <td>{{ empleado.nombre }}</td>
-        <td>{{ empleado.puesto }}</td>
+      <tr *ngFor="let empleado of empleados; let i = index" (click)="seleccionarEmpleado(empleado, i)" [class.table-primary]="indiceSeleccionado === i">
         <td>
-          <a routerLink="/empleado/nuevo" class="btn btn-primary">Agregar Nuevo</a>
+          <span *ngIf="editandoIndice !== i">{{ empleado.nombre }}</span>
+          <input *ngIf="editandoIndice === i" type="text" #nombreInput (input)="actualizarNombre(nombreInput.value)" [value]="empleadoEditado?.nombre">
+        </td>
+        <td>
+          <span *ngIf="editandoIndice !== i">{{ empleado.puesto }}</span>
+          <input *ngIf="editandoIndice === i" type="text" #puestoInput (input)="actualizarPuesto(puestoInput.value)" [value]="empleadoEditado?.puesto">
+        </td>
+        <td>
+          <span *ngIf="editandoIndice !== i">{{ empleado.empresaId }}</span>
+          <input *ngIf="editandoIndice === i" type="text" #departamentoInput (input)="actualizarDepartamento(departamentoInput.value)" [value]="empleadoEditado?.empresaId">
+        </td>
+        <td>
+          <button *ngIf="editandoIndice !== i" (click)="filtrarPorPuesto()">Filtrar</button>
+          <button *ngIf="editandoIndice !== i" (click)="borrarSeleccionado()">Borrar</button>
+          <button *ngIf="editandoIndice !== i" (click)="alterarSeleccionado(i, empleado)">Alterar</button>
+          <button *ngIf="editandoIndice === i" (click)="guardarEmpleadoEditado()">Guardar</button>
+          <button *ngIf="editandoIndice === i" (click)="cancelarEdicion()">Cancelar</button>
         </td>
       </tr>
     </tbody>
